@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dang Nhap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link type="text/css" rel="stylesheet" href="dn.css">
+</head>
+<body>
+    <form name="FDN" method="post">
+        <div class="DN">
+            <div id="dn">Đăng Nhập Tài Khoản</div>
+            <br>
+            <div style="padding-top: 5px;">
+                <p style="padding-bottom: 30px;">Welcome to The Website! <span style="color: blue;">Please sign in</span></p>
+                <label style="margin-left: -189px;">Số điện thoại/Email</label>
+                <br>
+                <input type="text" name="Phone/Email" placeholder="Số điện thoại/Email" size="40px">
+                <br>
+                <br>
+                <label style="margin-left: -209px;">Nhập Mật Khẩu</label>
+                <br>
+                <input type="password" name="Password" placeholder="Nhập Mật Khẩu" size="40px">
+                <br>
+                <div id="toast">
+                 </div>
+                 <div>
+                     <div onclick="showSuccessToast();" class="btn btn--success">Đăng Nhập</div>
+                 
+                 </div>
+                
+                <br>
+                <p style="margin-left: 10px; margin-top: 5px;">HOẶC</p>
+                <br>
+            </div>
+            <div>
+                <button class="app">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png" class="gg">
+                    <span class="gg-text">Tiếp tục với Google</span>
+                </button>
+            </div>
+            <div>
+                <button class="app-fb">
+                    <img src="https://1.bp.blogspot.com/-xKSHIGIWVWw/X8nZ7UZCHYI/AAAAAAAALBs/aih3kRhHrnsR_-GLju2gP2PK_faM_nNsACPcBGAYYCw/s600/Beautiful-design-Facebook-logo-social-media-png.png" class="fb">
+                    <span class="fb-text">Tiếp tục với Facebook</span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <script>
+        function toast({
+            title = '',
+            message = '',
+            type = 'info',
+            duration = 1000
+        })
+       {
+            const main = document.getElementById('toast');
+            if(main) {
+                const toast = document.createElement('div');
+                 
+                 const autoRemoveId = setTimeout(function(){
+                     main.removeChild(toast);
+    
+                }, duration + 1000);
+                toast.onclick = function(e){
+                    if(e.target.closest('.toast_close')){
+                        main.removeChild(toast);
+                        clearTimeout(autoRemoveId);
+                    }
+                }
+                const icons = {
+                    success: 'fas fa-check-circle',
+                    info: 'fas fa-info-circle',
+                    warning: 'fas fa-exclamation-circle',
+                    error: 'fas fa-exclamation-circle',
+                };
+                const icon = icons[type];
+                const delay = (duration / 1000).toFixed(2);
+                toast.classList.add('toast', `toast--${type}`);
+                toast.style.animation = ` slideInLeft ease .3s fadeOut linear 1s 3s forwards`;
+                toast.innerHTML = `
+                <div class="toast_icon">
+            <i class="${icon}"></i>
+        </div>
+        <div class="toast_body">
+            <h3 class="toast_title">${title}</h3>
+            <p class="toast_msg">${message}</p>
+        </div>
+        <div class="toast_close">
+            <i class="fas fa-times"></i>
+        </div>
+        `;
+        main.appendChild(toast);
+    
+    }  
+        }
+        function showSuccessToast() {
+        toast({
+          title: "Thành công",
+          message: "Bạn đã đăng nhập thành công tài khoản",
+          type: "success",
+          duration: 5000
+        });
+      }
+     
+    
+    </script>
+</body>
+</html>
